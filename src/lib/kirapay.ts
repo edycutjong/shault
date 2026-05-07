@@ -41,7 +41,7 @@ export class KiraPayService {
       }
     }
     
-    // Fallback Mock
+    // Fallback for demo
     await new Promise(res => setTimeout(res, 600));
     return `https://pay.kirapay.com/${Math.random().toString(36).substring(7)}`;
   }
@@ -60,7 +60,7 @@ export class KiraPayService {
       }
     }
     
-    // Fallback Mock
+    // Fallback for demo
     await new Promise(res => setTimeout(res, 1200));
     return true;
   }

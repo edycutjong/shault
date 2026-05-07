@@ -19,7 +19,7 @@ export default function Home() {
 
   const handleSimulatePayment = async () => {
     setPaymentStatus('verifying');
-    await kiraPayService.verifyPayment("mock_payment_id");
+    await kiraPayService.verifyPayment("pending_payment");
     setPaymentStatus('success');
     setTimeout(() => setView('vault'), 1500);
   };
