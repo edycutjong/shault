@@ -1,5 +1,8 @@
 "use client";
 
+import { StatusBar } from "@/components/StatusBar";
+import { Footer } from "@/components/Footer";
+
 import React, { useState } from 'react';
 import { kiraPayService } from '@/lib/kirapay';
 
@@ -25,6 +28,8 @@ export default function Home() {
   };
 
   return (
+    <>
+      <StatusBar />
     <main className="min-h-screen flex flex-col bg-slate-950 text-slate-300">
       <header className="border-b border-purple-500/30 bg-slate-900/80 p-4 px-8 flex justify-between items-center backdrop-blur">
         <div className="font-mono text-purple-500 font-bold tracking-widest text-xl">SHAULT</div>
@@ -157,5 +162,7 @@ export default function Home() {
 
       </div>
     </main>
+      <Footer />
+    </>
   );
 }
