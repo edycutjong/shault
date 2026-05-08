@@ -7,6 +7,28 @@
   --color-slate-950: #020617;
   --color-slate-900: #0f172a;
   --color-purple-500: #a855f7;
+
+  --animate-scan: scan 2.5s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+
+  @keyframes scan {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(180px); } /* Adjust based on QR size */
+  }
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.3); }
+    100% { box-shadow: 0 0 25px rgba(168, 85, 247, 0.6); border-color: rgba(168, 85, 247, 0.8); }
+  }
 }
 
 @layer base {
@@ -20,4 +42,12 @@
     color: var(--foreground);
     @apply antialiased;
   }
+}
+
+.bg-grid-white\/\[0\.02\] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.02)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.glass-panel {
+  @apply bg-slate-900/50 backdrop-blur-xl border border-slate-800/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)];
 }
