@@ -36,3 +36,10 @@ graph TB
 | POST | `/api/payment/create` | Create KiraPay payment link |
 | POST | `/api/payment/webhook` | KiraPay callback → trigger vault deposit |
 | GET | `/api/payment/:id/status` | Check payment status |
+
+## UI Stack & Aesthetic
+
+- **Framework**: Next.js 16 (App Router), React 19, Tailwind CSS v4.
+- **Animations**: Framer Motion for page transitions (`AnimatePresence`) and interactive elements.
+- **Visuals**: Premium "cyber-vault" aesthetic utilizing glassmorphism (`glass-panel` utilities), custom particle backgrounds, simulated scanner logic (`animate-scan`), and dynamic glow effects.
+- **Iconography**: Lucide React.
