@@ -28,7 +28,7 @@
 [**▶️ Watch the Demo Video**](https://youtube.com/your-video)
 
 <div align="center">
-  <img src="docs/og-image.png" alt="App Demo" width="100%">
+  <img src="public/og-image.png" alt="App Demo" width="100%">
 </div>
 
 ## 💡 The Problem & Solution
