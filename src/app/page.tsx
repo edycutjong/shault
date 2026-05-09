@@ -96,10 +96,11 @@ export default function Home() {
 
                 <form onSubmit={handleCreateLink} className="space-y-6">
                   <motion.div variants={itemVariants}>
-                    <label className="block text-xs font-mono text-slate-400 mb-2 tracking-wider">AMOUNT (USDC)</label>
+                    <label htmlFor="amount-input" className="block text-xs font-mono text-slate-400 mb-2 tracking-wider">AMOUNT (USDC)</label>
                     <div className="relative group">
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-500 font-mono text-xl group-focus-within:animate-pulse-slow">$</span>
                       <input 
+                        id="amount-input"
                         type="number" 
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
