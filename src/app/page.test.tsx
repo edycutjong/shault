@@ -6,12 +6,19 @@ import { kiraPayService } from '@/lib/kirapay';
 // Mock framer-motion
 vi.mock('framer-motion', () => {
   const filterProps = (props: any) => {
-    const {
-      initial, animate, exit, transition, whileHover, whileTap, variants,
-      style, layoutId, layout, custom,
-      ...rest
-    } = props;
-    return rest;
+    const newProps = { ...props };
+    delete newProps.initial;
+    delete newProps.animate;
+    delete newProps.exit;
+    delete newProps.transition;
+    delete newProps.whileHover;
+    delete newProps.whileTap;
+    delete newProps.variants;
+    delete newProps.style;
+    delete newProps.layoutId;
+    delete newProps.layout;
+    delete newProps.custom;
+    return newProps;
   };
   
   return {

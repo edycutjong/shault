@@ -93,7 +93,7 @@ describe('ParticleBackground', () => {
 
   it('should handle null canvas ref gracefully', () => {
     const originalUseRef = React.useRef;
-    const useRefSpy = vi.spyOn(React, 'useRef').mockImplementation((init: any) => {
+    const useRefSpy = vi.spyOn(React, 'useRef').mockImplementation((init: unknown) => {
       if (init === null) {
         return { 
           get current() { return null; },

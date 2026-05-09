@@ -51,9 +51,9 @@ export function ParticleBackground() {
 
       draw() {
         ctx!.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx!.beginPath();
+        ctx!.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx!.fill();
       }
     }
 
@@ -73,19 +73,19 @@ export function ParticleBackground() {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 100) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(168, 85, 247, ${0.1 - distance / 1000})`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
+            ctx!.beginPath();
+            ctx!.strokeStyle = `rgba(168, 85, 247, ${0.1 - distance / 1000})`;
+            ctx!.lineWidth = 0.5;
+            ctx!.moveTo(particles[i].x, particles[i].y);
+            ctx!.lineTo(particles[j].x, particles[j].y);
+            ctx!.stroke();
           }
         }
       }
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx!.clearRect(0, 0, canvas.width, canvas.height);
       
       particles.forEach(particle => {
         particle.update();
