@@ -4,16 +4,27 @@ import Home from './page';
 import { kiraPayService } from '@/lib/kirapay';
 
 // Mock framer-motion
-vi.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    h1: ({ children, ...props }: any) => <h1 {...props}>{children}</h1>,
-    p: ({ children, ...props }: any) => <p {...props}>{children}</p>,
-    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
-    tr: ({ children, ...props }: any) => <tr {...props}>{children}</tr>,
-  },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
-}));
+vi.mock('framer-motion', () => {
+  const filterProps = (props: any) => {
+    const {
+      initial, animate, exit, transition, whileHover, whileTap, variants,
+      style, layoutId, layout, custom,
+      ...rest
+    } = props;
+    return rest;
+  };
+  
+  return {
+    motion: {
+      div: ({ children, ...props }: any) => <div {...filterProps(props)}>{children}</div>,
+      h1: ({ children, ...props }: any) => <h1 {...filterProps(props)}>{children}</h1>,
+      p: ({ children, ...props }: any) => <p {...filterProps(props)}>{children}</p>,
+      button: ({ children, ...props }: any) => <button {...filterProps(props)}>{children}</button>,
+      tr: ({ children, ...props }: any) => <tr {...filterProps(props)}>{children}</tr>,
+    },
+    AnimatePresence: ({ children }: any) => <>{children}</>,
+  };
+});
 
 // Mock lucide-react
 vi.mock('lucide-react', () => ({

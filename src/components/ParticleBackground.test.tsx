@@ -1,3 +1,4 @@
+import React from 'react';
 import { render } from '@testing-library/react';
 
 import { ParticleBackground } from './ParticleBackground';
@@ -53,7 +54,8 @@ describe('ParticleBackground', () => {
     expect(HTMLCanvasElement.prototype.getContext).toHaveBeenCalled();
   });
 
-  it('should update particles correctly (branch coverage)', async () => {
+  it('should update particles correctly and handle boundaries', async () => {
+    vi.useFakeTimers();
     // Mock getContext
     const mockCtx = {
       clearRect: vi.fn(),
@@ -66,15 +68,42 @@ describe('ParticleBackground', () => {
     };
     HTMLCanvasElement.prototype.getContext = vi.fn().mockReturnValue(mockCtx);
     
-    // Force a small window so particles hit boundaries faster
-    Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 10 });
-    Object.defineProperty(window, 'innerHeight', { writable: true, configurable: true, value: 10 });
+    // Force a small window so particles hit boundaries faster but still create particles
+    Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 200 });
+    Object.defineProperty(window, 'innerHeight', { writable: true, configurable: true, value: 100 });
+
+    const originalRandom = Math.random;
+    let callCount = 0;
+    Math.random = () => {
+      callCount++;
+      return callCount % 2 === 0 ? -0.5 : 1.5; // Extreme values to push out of bounds fast
+    };
 
     render(<ParticleBackground />);
     
-    // Wait for animation frame to run several times to ensure particles update
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Fast forward enough time to guarantee particles hit all boundaries
+    for(let i=0; i<100; i++) {
+        vi.advanceTimersByTime(16); // 16ms roughly 1 frame
+    }
     
     expect(mockCtx.clearRect).toHaveBeenCalled();
+    Math.random = originalRandom;
+    vi.useRealTimers();
+  });
+
+  it('should handle null canvas ref gracefully', () => {
+    const originalUseRef = React.useRef;
+    const useRefSpy = vi.spyOn(React, 'useRef').mockImplementation((init: any) => {
+      if (init === null) {
+        return { 
+          get current() { return null; },
+          set current(val) { /* ignore assignment by React */ }
+        };
+      }
+      return originalUseRef(init);
+    });
+    
+    render(<ParticleBackground />);
+    useRefSpy.mockRestore();
   });
 });

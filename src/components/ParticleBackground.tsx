@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 
 export function ParticleBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -50,8 +50,7 @@ export function ParticleBackground() {
       }
 
       draw() {
-        if (!ctx) return;
-        ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
+        ctx!.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();

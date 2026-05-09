@@ -1,7 +1,7 @@
 <div align="center">
   <h1>Shault 🚀</h1>
   <p><em>KiraPay-powered privacy vault ingress. Pay → verify → stealth deposit.</em></p>
-  <img src="docs/assets/readme-hero.png" alt="Shault Hero" width="100%">
+  <img src="docs/readme-hero.png" alt="Shault Hero" width="100%">
   
   <br/>
   
@@ -28,7 +28,7 @@
 [**▶️ Watch the Demo Video**](https://youtube.com/your-video)
 
 <div align="center">
-  <img src="docs/assets/og-image.png" alt="App Demo" width="100%">
+  <img src="docs/og-image.png" alt="App Demo" width="100%">
 </div>
 
 ## 💡 The Problem & Solution
@@ -66,7 +66,7 @@ For a detailed breakdown of our system architecture and data flow, please refer 
 
 ## 🚀 Run it Locally (For Judges)
 
-1. **Clone the repo:** `git clone https://github.com/edycutjong/frontier-kirapay.git`
+1. **Clone the repo:** `git clone https://github.com/edycutjong/shault.git`
 2. **Install dependencies:** `npm install`
 3. **Set up environment variables:**
    ```bash
