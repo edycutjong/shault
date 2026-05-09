@@ -5,8 +5,8 @@
   
   <br/>
   
-  [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://kirapay.vercel.app)
-  [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg)](https://kirapay.vercel.app/pitch)
+  [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://shault.edycu.dev)
+  [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg)](https://shault.edycu.dev/pitch)
   [![Pitch Video](https://img.shields.io/badge/Pitch-Video-red.svg)](https://youtube.com/your-video)
   [![Superteam Earn](https://img.shields.io/badge/Superteam-Earn_Listing-blue.svg)](https://superteam.fun/earn/listing/build-with-kirapay)
 
