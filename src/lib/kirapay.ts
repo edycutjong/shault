@@ -13,8 +13,8 @@ export class KiraPayService {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.kiraPay = new KiraPay({ apiKey } as any);
         this.kiraPay.setBaseUrl('https://api.kirapay.com');
-      } catch {
-        console.warn("[KiraPay SDK] Initialization failed, falling back to mock mode");
+      } catch (e) {
+        console.warn("[KiraPay SDK] Initialization failed, falling back to mock mode", e);
       }
     } else {
       console.warn("[KiraPay SDK] No API key found, falling back to mock mode");
