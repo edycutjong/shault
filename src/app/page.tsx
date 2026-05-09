@@ -252,12 +252,16 @@ export default function Home() {
                       >
                         <td className="p-5 text-slate-300">Just now</td>
                         <td className="p-5 text-emerald-400 font-bold group-hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.5)] transition-all">+{amount} USDC</td>
-                        <td className="p-5 text-slate-400 truncate max-w-[150px] flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-purple-500" />
-                          KiraPay Webhook #892
+                        <td className="p-5 text-slate-400">
+                          <div className="flex items-center gap-2 max-w-[150px]">
+                            <div className="w-2 h-2 rounded-full bg-purple-500 shrink-0" />
+                            <span className="truncate">KiraPay Webhook #892</span>
+                          </div>
                         </td>
-                        <td className="p-5 text-right text-emerald-400 flex items-center justify-end gap-2">
-                          Deposited <CheckCircle2 className="w-4 h-4" />
+                        <td className="p-5 text-emerald-400">
+                          <div className="flex items-center justify-end gap-2">
+                            Deposited <CheckCircle2 className="w-4 h-4" />
+                          </div>
                         </td>
                       </motion.tr>
                       <motion.tr 
