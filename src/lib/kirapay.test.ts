@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach, Mock, afterEach } from 'vitest';
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { KiraPayService } from './kirapay';
 import { KiraPay } from 'kirapay-sdk';
 
@@ -8,7 +9,7 @@ vi.mock('kirapay-sdk', () => ({
 
 describe('KiraPayService', () => {
   let service: KiraPayService;
-  let mockKiraPayInstance: { setBaseUrl: Mock; createPaymentLink: Mock; getPaymentStatus: Mock; };
+  let mockKiraPayInstance: { setBaseUrl: any; createPaymentLink: any; getPaymentStatus: any; };
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -20,7 +21,7 @@ describe('KiraPayService', () => {
       getPaymentStatus: vi.fn(),
     };
 
-    (KiraPay as Mock).mockImplementation(function() { return mockKiraPayInstance; });
+    (KiraPay as any).mockImplementation(function() { return mockKiraPayInstance; });
 
     // Provide a fresh instance for every test
     service = new KiraPayService();
@@ -61,7 +62,7 @@ describe('KiraPayService', () => {
 
     it('should fallback to mock mode if KiraPay instantiation throws', () => {
       vi.stubEnv('KIRAPAY_API_KEY', 'test-key');
-      (KiraPay as Mock).mockImplementationOnce(function() {
+      (KiraPay as any).mockImplementationOnce(function() {
         throw new Error('Instantiation failed');
       });
       service.init();
