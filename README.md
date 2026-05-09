@@ -8,7 +8,7 @@
   [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://kirapay.vercel.app)
   [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg)](https://kirapay.vercel.app/pitch)
   [![Pitch Video](https://img.shields.io/badge/Pitch-Video-red.svg)](https://youtube.com/your-video)
-  [![Superteam Earn](https://img.shields.io/badge/Superteam-Earn_Listing-blue.svg)](https://superteam.fun/earn/listing/kirapay-frontier-april-2026)
+  [![Superteam Earn](https://img.shields.io/badge/Superteam-Earn_Listing-blue.svg)](https://superteam.fun/earn/listing/build-with-kirapay)
 
   <br/>
 
@@ -53,7 +53,7 @@ KiraPay as payment ingress for privacy vault. Pay → verify → deposit into st
 | **Payment Gateway**| KiraPay SDK | Seamless crypto payment ingress |
 | **Testing** | Vitest | Comprehensive unit and component testing |
 
-For a detailed breakdown of our system architecture and data flow, please refer to the [Architecture Document](docs/ARCHITECTURE.md) and [Product Requirements Document](docs/PRD.md) for full system specifications.
+For a detailed breakdown of our system architecture and data flow, please refer to the [Architecture Document](docs/ARCHITECTURE.md) for full system specifications.
 
 ## 🧩 How We Use KiraPay
 
