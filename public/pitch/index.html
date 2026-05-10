@@ -1,395 +1,127 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Shault Pitch Deck</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/monokai.min.css">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <style>
-      :root {
-        --brand-cyan: #06b6d4;
-        --brand-purple: #a855f7;
-        --bg-dark: #020617;
-        --glass-bg: rgba(30, 41, 59, 0.4);
-        --glass-border: rgba(148, 163, 184, 0.1);
-      }
-      
-      body {
-        background: var(--bg-dark);
-        overflow: hidden;
-      }
-      
-      /* Canvas Background */
-      #canvas-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -1;
-        pointer-events: none;
-        opacity: 0.8;
-      }
-
-      /* Base Typography */
-      .reveal {
-        font-family: 'Inter', system-ui, sans-serif;
-        color: #f8fafc;
-      }
-      
-      .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
-        text-transform: none;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        text-shadow: 0 0 20px rgba(0,0,0,0.5);
-      }
-      
-      /* Glowing Brand Text */
-      .brand-text {
-        background: linear-gradient(135deg, var(--brand-purple), var(--brand-cyan));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: 900;
-        display: inline-block;
-        filter: drop-shadow(0px 0px 8px rgba(168, 85, 247, 0.4));
-      }
-      
-      /* Glassmorphism Panels */
-      .glass-panel {
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--glass-border);
-        border-radius: 24px;
-        padding: 40px;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        text-align: left;
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .glass-panel::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      }
-      
-      /* Grid Layouts */
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        align-items: stretch;
-      }
-      
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-      }
-      
-      /* Metric Boxes */
-      .metric-box {
-        background: rgba(15, 23, 42, 0.6);
-        border: 1px solid rgba(148, 163, 184, 0.1);
-        border-radius: 16px;
-        padding: 30px 20px;
-        text-align: center;
-        transition: transform 0.3s ease, border-color 0.3s ease;
-      }
-      
-      .metric-box:hover {
-        transform: translateY(-5px);
-        border-color: rgba(6, 182, 212, 0.3);
-      }
-      
-      .metric-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 64px;
-        height: 64px;
-        margin: 0 auto 20px;
-        background: rgba(6, 182, 212, 0.1);
-        border-radius: 16px;
-        color: var(--brand-cyan);
-      }
-      
-      .metric-value {
-        font-size: 2.5em;
-        font-weight: 800;
-        font-family: 'JetBrains Mono', monospace;
-        color: #fff;
-        margin: 0;
-        line-height: 1;
-        text-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
-      }
-      
-      .metric-label {
-        font-size: 0.55em;
-        color: #94a3b8;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-top: 10px;
-        font-weight: 600;
-      }
-      
-      /* Lists & Text */
-      .reveal ul {
-        margin-left: 1.5em;
-      }
-      
-      .reveal li {
-        margin-bottom: 15px;
-        color: #cbd5e1;
-        font-size: 0.9em;
-      }
-      
-      .highlight {
-        color: var(--brand-cyan);
-        font-weight: 600;
-      }
-      
-      .danger {
-        color: #ef4444;
-      }
-      
-      .terminal-block {
-        background: #0f172a;
-        border: 1px solid #334155;
-        border-radius: 12px;
-        padding: 20px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.6em;
-        color: #a855f7;
-        text-align: left;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Interactive Background -->
-    <canvas id="canvas-bg"></canvas>
-
-    <div class="reveal">
-      <div class="slides">
-        
-        <!-- Slide 1: Hero -->
-        <section>
-          <div class="glass-panel" style="text-align: center; padding: 80px 40px; max-width: 800px; margin: 0 auto;">
-            <i data-lucide="shield-check" style="width: 80px; height: 80px; color: var(--brand-purple); margin: 0 auto 20px;"></i>
-            <h1 style="font-size: 4em; margin-bottom: 10px;"><span class="brand-text">Shault</span></h1>
-            <p style="font-size: 1.2em; color: #cbd5e1; margin-bottom: 40px; font-weight: 300;">
-              KiraPay-powered privacy vault ingress. <br/>
-              <span style="color: #fff; font-weight: 500;">Pay → Verify → Stealth Deposit.</span>
-            </p>
-            <div style="display: flex; justify-content: center; gap: 20px;">
-              <span style="background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.5em; text-transform: uppercase; letter-spacing: 2px; color: #c084fc;">Colosseum Frontier 2026</span>
-              <span style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.5em; text-transform: uppercase; letter-spacing: 2px; color: #67e8f9;">KiraPay Track</span>
-            </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Shault — DAO Salary Vault on Solana | Pitch Deck</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--cyan:#06b6d4;--purple:#a855f7;--green:#22c55e;--red:#ef4444;--amber:#f59e0b;--rose:#f43f5e;--blue:#3b82f6;--slate-400:#94a3b8;--slate-600:#475569}
+    body{background:#020617}
+    #particle-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    .reveal{font-family:'Inter',system-ui,sans-serif;position:relative;z-index:1}
+    .reveal .slide-background{background:transparent!important}
+    .reveal .slides section{background:transparent}
+    .reveal h1,.reveal h2,.reveal h3{text-transform:none;font-family:'Inter',system-ui,sans-serif;font-weight:800;letter-spacing:-0.03em}
+    .brand-gradient{background:linear-gradient(135deg,var(--blue),var(--cyan),var(--blue));background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gs 4s ease infinite}
+    @keyframes gs{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;font-size:.55em;font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)}
+    .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);animation:pulse 2s ease-in-out infinite;box-shadow:0 0 8px var(--blue)}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+    .glass-card{background:rgba(255,255,255,0.03);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+    .glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent)}
+    .glass-card:hover{border-color:rgba(59,130,246,0.25);transform:translateY(-2px);box-shadow:0 8px 32px rgba(59,130,246,0.1)}
+    .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:stretch}
+    .metric-value{font-family:'JetBrains Mono',monospace;font-size:3em;font-weight:700;margin:0;line-height:1}
+    .metric-label{font-size:.48em;color:var(--slate-400);text-transform:uppercase;letter-spacing:3px;margin-top:12px;font-weight:600}
+    .icon-ring{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6em;margin-bottom:16px}
+    .icon-ring.blue{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2)}
+    .icon-ring.cyan{background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2)}
+    .icon-ring.green{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2)}
+    .reveal .problem-list{list-style:none;width:90%;text-align:left}
+    .reveal .problem-list li{padding:16px 20px;margin-bottom:12px;border-radius:12px;background:rgba(239,68,68,0.05);border-left:3px solid var(--red);color:#e2e8f0;font-size:.85em;line-height:1.5}
+    .flow-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+    .flow-node{padding:10px 20px;border-radius:10px;font-size:.6em;font-family:'JetBrains Mono',monospace;font-weight:600}
+    .flow-arrow{color:var(--slate-600);font-size:1.2em}
+    .terminal-block{background:#0a0a0a;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;text-align:left;font-family:'JetBrains Mono',monospace;font-size:.5em}
+    .terminal-header{display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06)}
+    .terminal-dot{width:10px;height:10px;border-radius:50%}
+    .terminal-body{padding:16px;line-height:1.8}
+    .t-cyan{color:var(--cyan)}.t-green{color:var(--green)}.t-red{color:var(--red)}.t-blue{color:var(--blue)}.t-amber{color:var(--amber)}.t-dim{color:var(--slate-600)}
+    .link-card{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);text-decoration:none;transition:all .3s ease;margin-bottom:10px}
+    .link-card:hover{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.3);transform:translateX(4px)}
+    .link-card .link-label{font-size:.6em;color:var(--blue);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+    .link-card .link-url{font-size:.7em;color:#fff;font-family:'JetBrains Mono',monospace}
+    .link-card .link-icon{font-size:1.4em}
+  </style>
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div class="badge"><span class="dot"></span> KiraPay SDK</div>
+        <h1 style="font-size:3.5em;margin-top:24px"><span class="brand-gradient">Shault</span></h1>
+        <p style="color:#cbd5e1;font-size:.95em;max-width:640px;margin:16px auto 0;line-height:1.6"><strong style="color:#fff">DAO salary vault.</strong> Scheduled payroll streaming + batch disbursement via KiraPay. Treasury management on Solana.</p>
+        <p style="color:var(--slate-400);font-size:.65em;margin-top:40px;letter-spacing:2px;text-transform:uppercase">Colosseum Frontier Hackathon 2026</p>
+      </section>
+      <section>
+        <h2 style="font-size:2em">The <span style="color:var(--red)">Problem</span></h2>
+        <p style="color:var(--slate-400);font-size:.75em;margin-bottom:28px">DAO treasury management is manual, error-prone, and opaque.</p>
+        <ul class="problem-list">
+          <li>⏰ <strong>Manual payroll</strong> — Someone manually sends tokens to each contributor every month. Error-prone.</li>
+          <li>📋 <strong>No vesting</strong> — No way to stream salaries or enforce vesting schedules on-chain.</li>
+          <li>🔐 <strong>Multisig friction</strong> — Every payment requires multiple signers. Overhead kills velocity.</li>
+        </ul>
+      </section>
+      <section>
+        <h2 style="font-size:2em">The <span class="brand-gradient">Solution</span></h2>
+        <p style="color:#cbd5e1;font-size:.75em;margin-bottom:24px">Automated salary vault: configure once, stream forever.</p>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="glass-card" style="text-align:left"><div class="icon-ring blue">🏦</div><h3 style="font-size:.9em;color:#fff;margin:0 0 8px">Salary Vault</h3><p style="font-size:.55em;color:var(--slate-400);line-height:1.6">Treasury deposits into vault. Contributors are added with rates. Payroll runs automatically.</p></div>
+          <div class="glass-card" style="text-align:left"><div class="icon-ring cyan">💸</div><h3 style="font-size:.9em;color:#fff;margin:0 0 8px">KiraPay Streaming</h3><p style="font-size:.55em;color:var(--slate-400);line-height:1.6">Real-time salary streaming via KiraPay SDK. Contributors claim anytime.</p></div>
+          <div class="glass-card" style="text-align:left"><div class="icon-ring green">📊</div><h3 style="font-size:.9em;color:#fff;margin:0 0 8px">Treasury Dashboard</h3><p style="font-size:.55em;color:var(--slate-400);line-height:1.6">Real-time burn rate, runway projection, and contributor analytics.</p></div>
+        </div>
+      </section>
+      <section>
+        <h2 style="font-size:1.8em">Vault Payroll Flow</h2>
+        <div class="flow-row" style="margin:30px 0 20px">
+          <div class="flow-node" style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:var(--blue)">🏦 Fund Vault</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.3);color:var(--cyan)">👥 Add Team</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:var(--amber)">💸 Stream</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:var(--green)">✅ Claim</div>
+        </div>
+        <div class="terminal-block" style="max-width:680px;margin:0 auto">
+          <div class="terminal-header"><div class="terminal-dot" style="background:#ef4444"></div><div class="terminal-dot" style="background:#f59e0b"></div><div class="terminal-dot" style="background:#22c55e"></div><span style="color:var(--slate-400);margin-left:8px">Shault Vault Engine</span></div>
+          <div class="terminal-body">
+            <div><span class="t-dim">[vault]</span> <span class="t-blue">🏦</span> Vault funded: 250,000 USDC — 6-month runway</div>
+            <div><span class="t-dim">[team]</span> <span class="t-cyan">👥</span> 8 contributors added — avg. rate: 5,000 USDC/mo</div>
+            <div><span class="t-dim">[stream]</span> <span class="t-amber">💸</span> KiraPay streaming active — 0.0019 USDC/sec per contributor</div>
+            <div><span class="t-dim">[claim]</span> <span class="t-green">✓</span> alice.sol claimed 2,847 USDC — 0 manual steps</div>
           </div>
-        </section>
-
-        <!-- Slide 2: The Problem -->
-        <section>
-          <div class="glass-panel" style="max-width: 900px; margin: 0 auto;">
-            <h2>The <span class="danger">Problem</span></h2>
-            <p style="font-size: 1.1em; color: #cbd5e1; border-left: 4px solid #ef4444; padding-left: 20px; margin-bottom: 30px;">
-              Current cross-chain payment solutions lack the speed, privacy, and seamless integration required for institutional web3 adoption.
-            </p>
-            <div class="grid-3" style="margin-top: 40px;">
-              <div class="metric-box" style="padding: 20px;">
-                <i data-lucide="git-branch" style="color: #ef4444; margin-bottom: 15px; width: 40px; height: 40px;"></i>
-                <h4 style="font-size: 0.9em; color: #fff;">Fragmentation</h4>
-                <p style="font-size: 0.6em; color: #94a3b8; margin: 0;">Isolated liquidity and fragmented UX across chains.</p>
-              </div>
-              <div class="metric-box" style="padding: 20px;">
-                <i data-lucide="eye" style="color: #ef4444; margin-bottom: 15px; width: 40px; height: 40px;"></i>
-                <h4 style="font-size: 0.9em; color: #fff;">Public Exposure</h4>
-                <p style="font-size: 0.6em; color: #94a3b8; margin: 0;">Full payment trails visible on block explorers.</p>
-              </div>
-              <div class="metric-box" style="padding: 20px;">
-                <i data-lucide="alert-triangle" style="color: #ef4444; margin-bottom: 15px; width: 40px; height: 40px;"></i>
-                <h4 style="font-size: 0.9em; color: #fff;">Poor UX</h4>
-                <p style="font-size: 0.6em; color: #94a3b8; margin: 0;">Complex multi-sig and manual verification hurdles.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Slide 3: The Solution -->
-        <section>
-          <div class="glass-panel" style="max-width: 900px; margin: 0 auto;">
-            <h2>The <span class="brand-text">Solution</span></h2>
-            <p style="font-size: 1.1em; color: #cbd5e1; margin-bottom: 40px;">
-              <strong>Shault</strong> utilizes KiraPay to build an impenetrable privacy payment vault.
-            </p>
-            <div class="grid-2">
-              <div class="metric-box">
-                <div class="metric-icon"><i data-lucide="zap" style="width: 32px; height: 32px;"></i></div>
-                <h3 style="font-size: 1.1em; color: #fff;">Sub-second Execution</h3>
-                <p style="font-size: 0.7em; color: #94a3b8;">High performance KiraPay integrations guarantee instant verifiable deposits.</p>
-              </div>
-              <div class="metric-box">
-                <div class="metric-icon" style="background: rgba(168, 85, 247, 0.1); color: var(--brand-purple);"><i data-lucide="lock" style="width: 32px; height: 32px;"></i></div>
-                <h3 style="font-size: 1.1em; color: #fff;">Stealth by Design</h3>
-                <p style="font-size: 0.7em; color: #94a3b8;">Zero-knowledge proofs and stealth addressing obscure the final destination.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Slide 4: Engineering Quality -->
-        <section>
-          <div class="glass-panel" style="max-width: 900px; margin: 0 auto; text-align: center;">
-            <h2>Production <span class="brand-text">Ready</span></h2>
-            <div class="grid-2" style="margin: 40px 0;">
-              <div class="metric-box">
-                <p class="metric-value">100%</p>
-                <p class="metric-label">Test Coverage (Vitest)</p>
-              </div>
-              <div class="metric-box">
-                <p class="metric-value" style="color: #22c55e;">Zero</p>
-                <p class="metric-label">Lint / Build Warnings</p>
-              </div>
-            </div>
-            <div class="terminal-block">
-              <p style="margin: 0;">> Stack: Next.js 16 (App Router) + React 19</p>
-              <p style="margin: 5px 0;">> Styling: Tailwind CSS v4 + Framer Motion</p>
-              <p style="margin: 5px 0 0;">> Pipeline: Fully Automated GitHub Actions CI</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Slide 5: Demo / Links -->
-        <section>
-          <div class="glass-panel" style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <h2>Experience <span class="brand-text">Shault</span></h2>
-            
-            <div style="margin: 40px 0; display: flex; flex-direction: column; gap: 20px;">
-              <a href="https://shault.edycu.dev" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 15px; background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); padding: 20px; border-radius: 16px; color: #fff; text-decoration: none; transition: background 0.3s;">
-                <i data-lucide="external-link" style="color: var(--brand-cyan);"></i>
-                <span style="font-size: 1.2em; font-weight: 600;">shault.edycu.dev</span>
-              </a>
-              
-              <a href="https://github.com/edycutjong/frontier-kirapay" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 16px; color: #fff; text-decoration: none; transition: background 0.3s;">
-                <i data-lucide="github"></i>
-                <span style="font-size: 1.2em; font-family: 'JetBrains Mono', monospace;">edycutjong/frontier-kirapay</span>
-              </a>
-            </div>
-            
-            <p style="font-size: 0.8em; color: #94a3b8; font-weight: 500;">Thank you for your consideration.</p>
-          </div>
-        </section>
-
-      </div>
+        </div>
+      </section>
+      <section>
+        <h2 style="font-size:1.8em">Production Ready</h2>
+        <div class="grid-3" style="margin-top:24px">
+          <div class="glass-card" style="text-align:center"><p class="metric-value" style="color:var(--cyan)">100%</p><p class="metric-label">Test Coverage</p></div>
+          <div class="glass-card" style="text-align:center"><p class="metric-value" style="color:var(--green)">Zero</p><p class="metric-label">Manual Steps</p></div>
+          <div class="glass-card" style="text-align:center"><p class="metric-value" style="color:var(--blue)">24/7</p><p class="metric-label">Streaming</p></div>
+        </div>
+        <div class="flow-row" style="margin-top:28px;gap:20px;flex-wrap:wrap">
+          <span class="badge" style="font-size:.45em">Next.js 16</span><span class="badge" style="font-size:.45em">React 19</span><span class="badge" style="font-size:.45em">KiraPay SDK</span><span class="badge" style="font-size:.45em">Tailwind v4</span><span class="badge" style="font-size:.45em">CI/CD</span>
+        </div>
+      </section>
+      <section>
+        <h2 style="font-size:2em">Experience <span class="brand-gradient">Shault</span></h2>
+        <div style="max-width:420px;margin:32px auto 0">
+          <a href="https://shault.edycu.dev" target="_blank" class="link-card"><span class="link-icon">🚀</span><div><div class="link-label">Live Demo</div><div class="link-url">shault.edycu.dev</div></div></a>
+          <a href="https://github.com/edycutjong/shault" target="_blank" class="link-card"><span class="link-icon">📦</span><div><div class="link-label">Source Code</div><div class="link-url">edycutjong/shault</div></div></a>
+        </div>
+        <p style="font-size:.55em;color:var(--slate-600);margin-top:36px;font-style:italic">Fund once. Stream forever. Claim anytime.</p>
+      </section>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
-    
-    <!-- Background Animation Script -->
-    <script>
-      const canvas = document.getElementById('canvas-bg');
-      const ctx = canvas.getContext('2d');
-      let width, height;
-      let particles = [];
-      
-      function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      }
-      
-      window.addEventListener('resize', resize);
-      resize();
-      
-      class Particle {
-        constructor() {
-          this.x = Math.random() * width;
-          this.y = Math.random() * height;
-          this.vx = (Math.random() - 0.5) * 0.5;
-          this.vy = (Math.random() - 0.5) * 0.5;
-          this.size = Math.random() * 2;
-          this.color = Math.random() > 0.5 ? '#06b6d4' : '#a855f7';
-          this.alpha = Math.random() * 0.5 + 0.1;
-        }
-        
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          
-          if (this.x < 0 || this.x > width) this.vx *= -1;
-          if (this.y < 0 || this.y > height) this.vy *= -1;
-        }
-        
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.globalAlpha = this.alpha;
-          ctx.fill();
-        }
-      }
-      
-      for (let i = 0; i < 100; i++) {
-        particles.push(new Particle());
-      }
-      
-      function animate() {
-        ctx.clearRect(0, 0, width, height);
-        
-        // Draw connections
-        ctx.lineWidth = 0.5;
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            
-            if (dist < 150) {
-              ctx.beginPath();
-              ctx.strokeStyle = '#334155';
-              ctx.globalAlpha = (150 - dist) / 150 * 0.2;
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.stroke();
-            }
-          }
-        }
-        
-        particles.forEach(p => {
-          p.update();
-          p.draw();
-        });
-        
-        requestAnimationFrame(animate);
-      }
-      
-      animate();
-
-      // Initialize Reveal
-      Reveal.initialize({
-        hash: true,
-        transition: 'convex',
-        backgroundTransition: 'fade',
-        plugins: [ RevealHighlight ]
-      });
-      
-      // Initialize Icons
-      lucide.createIcons();
-    </script>
-  </body>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+  <script>
+    (function(){const c=document.getElementById('particle-canvas'),x=c.getContext('2d');let p=[];const N=75;function r(){c.width=innerWidth;c.height=innerHeight}addEventListener('resize',r);r();class P{constructor(){this.r()}r(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.s=Math.random()*1.5+.5;this.o=Math.random()*.5+.1}u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx*=-1;if(this.y<0||this.y>c.height)this.vy*=-1}d(){x.beginPath();x.arc(this.x,this.y,this.s,0,Math.PI*2);x.fillStyle=`rgba(59,130,246,${this.o})`;x.fill()}}for(let i=0;i<N;i++)p.push(new P);function a(){x.clearRect(0,0,c.width,c.height);p.forEach(q=>{q.u();q.d()});for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){const dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<150){x.beginPath();x.moveTo(p[i].x,p[i].y);x.lineTo(p[j].x,p[j].y);x.strokeStyle=`rgba(59,130,246,${.06*(1-d/150)})`;x.lineWidth=.5;x.stroke()}}requestAnimationFrame(a)}a()})();
+    Reveal.initialize({hash:true,transition:'fade',transitionSpeed:'slow',backgroundTransition:'fade',controls:true,progress:true,center:true,width:1200,height:700});
+  </script>
+</body>
 </html>
