@@ -69,10 +69,10 @@ describe('Home Page', () => {
     vi.clearAllMocks();
   });
 
-  it('should render the creation view by default', () => {
+  it('should render the landing view by default', () => {
     render(<Home />);
-    expect(screen.getByText('Create Link')).toBeDefined();
-    expect(screen.getByLabelText(/AMOUNT/i)).toBeDefined();
+    expect(screen.getByText(/Secure your/i)).toBeDefined();
+    expect(screen.getByText(/Launch Shault/i)).toBeDefined();
   });
 
   it('should generate a link and switch to pay view', async () => {
@@ -80,6 +80,9 @@ describe('Home Page', () => {
     (kiraPayService.generatePaymentLink as any).mockResolvedValue(mockLink);
 
     render(<Home />);
+    
+    // Navigate to create view
+    fireEvent.click(screen.getByText(/Launch Shault/i));
     
     const input = screen.getByRole('spinbutton');
     fireEvent.change(input, { target: { value: '250' } });
@@ -99,6 +102,9 @@ describe('Home Page', () => {
     (kiraPayService.verifyPayment as any).mockResolvedValue(true);
 
     render(<Home />);
+    
+    // Navigate to create view
+    fireEvent.click(screen.getByText(/Launch Shault/i));
     
     // Switch to pay view
     fireEvent.click(screen.getByText(/Generate Secure Link/i));

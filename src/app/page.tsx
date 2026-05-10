@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import { kiraPayService } from '@/lib/kirapay';
 
 export default function Home() {
-  const [view, setView] = useState<'create' | 'pay' | 'vault'>('create');
+  const [view, setView] = useState<'landing' | 'create' | 'pay' | 'vault'>('landing');
   const [amount, setAmount] = useState('100');
   const [paymentStatus, setPaymentStatus] = useState<'pending' | 'verifying' | 'success'>('pending');
 
@@ -51,7 +51,7 @@ export default function Home() {
         <StatusBar />
         
         <header className="border-b border-purple-500/20 bg-slate-900/40 p-4 px-8 flex justify-between items-center backdrop-blur-md sticky top-0 z-50">
-          <div className="flex items-center gap-3 font-mono text-purple-400 font-bold tracking-widest text-xl group cursor-pointer">
+          <div onClick={() => setView('landing')} className="flex items-center gap-3 font-mono text-purple-400 font-bold tracking-widest text-xl group cursor-pointer">
             <div className="p-2 bg-purple-500/10 rounded-lg group-hover:bg-purple-500/20 transition-colors border border-purple-500/20">
               <Shield className="w-5 h-5 group-hover:animate-pulse-slow" />
             </div>
@@ -75,6 +75,47 @@ export default function Home() {
 
         <div className="flex-1 flex items-center justify-center p-8">
           <AnimatePresence mode="wait">
+            {view === 'landing' && (
+              <motion.div 
+                key="landing"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="w-full max-w-4xl text-center relative py-12"
+              >
+                <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 font-mono text-sm mb-8">
+                  <Shield className="w-4 h-4" />
+                  <span>KiraPay Privacy Vault Ingress</span>
+                </motion.div>
+                
+                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+                  Secure your <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-indigo-400">crypto</span> with stealth deposits.
+                </motion.h1>
+                
+                <motion.p variants={itemVariants} className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12">
+                  Shault is a privacy-first payment vault. Accept payments publicly via KiraPay and route them securely into your private stealth address.
+                </motion.p>
+                
+                <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <button
+                    onClick={() => setView('create')}
+                    className="w-full sm:w-auto px-8 py-4 rounded-xl bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
+                  >
+                    Launch Shault <ArrowUpRight className="w-5 h-5" />
+                  </button>
+                  <a
+                    href="https://github.com/edycutjong/shault"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-white font-bold transition-all border border-slate-700 flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
+                  >
+                    View Source
+                  </a>
+                </motion.div>
+              </motion.div>
+            )}
+
             {view === 'create' && (
               <motion.div 
                 key="create"
