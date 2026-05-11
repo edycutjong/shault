@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://shault.com"),
+  metadataBase: new URL("https://shault.edycu.dev"),
   title: "Shault | Privacy Payment Vault",
   description: "Privacy-first payment vault powered by KiraPay.",
   icons: {
